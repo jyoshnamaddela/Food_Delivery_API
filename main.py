@@ -3,9 +3,11 @@ import sqlite3
 
 app = FastAPI()
 
+
 @app.get("/")
 def home():
     return {"message": "Welcome to Food Delivery API"}
+
 
 @app.get("/menu")
 def get_menu():
@@ -21,3 +23,23 @@ def get_menu():
     finally:
         connection.close()
 
+
+@app.post("/menu")
+def add_menu_item(item_name: str, price: float):
+    connection = sqlite3.connect("food_delivery.db")
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute(
+            "INSERT INTO menu_items (restaurant_id, item_name, price) VALUES (?, ?, ?)",
+            (1, item_name, price)
+        )
+        connection.commit()
+
+        return {
+            "message": "Food item added successfully",
+            "item_name": item_name,
+            "price": price
+        }
+    finally:
+        connection.close()
