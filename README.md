@@ -30,7 +30,7 @@ Live Demo
 
 Live API: Replace this line with your Render URL.
 
-API Documentation: Replace this line with your Render URL followed by "/docs".
+API Documentation:  https://food-delivery-apij.onrender.com
 
 How to Run Locally
 
